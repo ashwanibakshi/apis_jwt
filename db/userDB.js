@@ -171,19 +171,7 @@ module.exports.searchUser=(data,perpage,page)=>{
               reject(err);
           }
           else{
-         userModel.find({$or:[{"firstname":{$regex:data}},
-         {"lastname":{$regex:data}},{"email":{$regex:data}}]}).count((err,count)=>{
-                if(err){
-                    reject(err);
-                }
-                else{
-                    let data = {
-                        data:dataa,
-                        count:count
-                    }
-                   resolve(data);  
-                }
-           });
+              resolve(dataa);
           }
        });
       } catch (error) {

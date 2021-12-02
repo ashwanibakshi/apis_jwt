@@ -75,7 +75,7 @@ module.exports.searchUser=(req,res)=>{
     console.log(req.query.data);
     userModel.searchUser(req.query.data,perpage,page)
     .then((dataa)=>{
-        res.json({data:dataa.data,current:page,pages:Math.ceil(perpage/dataa.count)}); 
+        res.json({data:dataa}); 
     })
     .catch((err)=>{
         res.json({error:err.message});
