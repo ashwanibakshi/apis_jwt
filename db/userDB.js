@@ -161,14 +161,16 @@ module.exports.showAllUsers=(perpage,page)=>{
 module.exports.searchUser=(data)=>{
    return new Promise((resolve,reject)=>{
       try {
-        userModel.find({$or:[{"firstname":data},{"lastname":data},{"email":data},{"phno":data}]},(err,dataa)=>{
-            if(err){
-               reject(err);
-            }
-            else{
-                resolve(dataa);
-            }
-        });
+          console.log(data);
+       userModel.find({$or:[{"firstname":{$regex:data}},
+       {"lastname":{$regex:data}},{"email":{$regex:data}}]},(err,dataa)=>{
+          if(err){
+              reject(err);
+          }
+          else{
+              resolve(dataa);
+          }
+       });
       } catch (error) {
           reject(error);
       } 

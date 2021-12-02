@@ -63,23 +63,11 @@ module.exports.showAllUsers=(req,res)=>{
       })
 }
 
-var data;
+var data,field;
 
 module.exports.searchUser=(req,res)=>{
-    if(req.body.firstname!=undefined || req.body.firstname!=null){
-         data = req.body.firstname        
-    }
-    else if(req.body.lastname!=undefined || req.body.lastname!=null){
-         data = req.body.lastname 
-    }
-    else if(req.body.email!=undefined || req.body.email!=null){
-         data = req.body.email
-    }
-    else if(req.body.phno!=undefined || req.body.phno!=null){
-         data = req.body.phno
-    }
-    console.log(data);
-    userModel.searchUser(data)
+    console.log(req.params.data);
+    userModel.searchUser(req.params.data)
     .then((dataa)=>{
         res.json({data:dataa}); 
     })
