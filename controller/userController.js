@@ -63,13 +63,19 @@ module.exports.showAllUsers=(req,res)=>{
       })
 }
 
-var data,field;
-
 module.exports.searchUser=(req,res)=>{
-    console.log(req.params.data);
-    userModel.searchUser(req.params.data)
+    
+    if(req.query.perpage!=undefined || req.query.perpage!=null){
+        perpage = req.query.perpage;
+    }
+    if(req.query.page!=undefined || req.query.page!=null){
+        page = req.query.page; 
+    }
+
+    console.log(req.query.data);
+    userModel.searchUser(req.query.data,perpage,page)
     .then((dataa)=>{
-        res.json({data:dataa}); 
+        res.json({data:dataa.data,current:page,pages:Math.ceil(perpage/dataa.count)}); 
     })
     .catch((err)=>{
         res.json({error:err.message});

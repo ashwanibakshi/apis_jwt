@@ -14,6 +14,6 @@ route.put("/userdetails",authentication,userController.updateUserDetails);
 
 route.get("/showallusers",userController.showAllUsers);
 
-route.post("/searchuser/:data",authentication,userController.searchUser);
+route.get("/searchuser",authentication,userController.searchUser);
 
 module.exports = route;

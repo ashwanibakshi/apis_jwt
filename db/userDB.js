@@ -158,17 +158,32 @@ module.exports.showAllUsers=(perpage,page)=>{
    });
 }
 
-module.exports.searchUser=(data)=>{
+module.exports.searchUser=(data,perpage,page)=>{
    return new Promise((resolve,reject)=>{
       try {
-          console.log(data);
+        //   console.log(data);
+        query.skip  = (perpage*page)-perpage;
+        query.limit = perpage;
+
        userModel.find({$or:[{"firstname":{$regex:data}},
-       {"lastname":{$regex:data}},{"email":{$regex:data}}]},(err,dataa)=>{
+       {"lastname":{$regex:data}},{"email":{$regex:data}}]},{},query,(err,dataa)=>{
           if(err){
               reject(err);
           }
           else{
-              resolve(dataa);
+         userModel.find({$or:[{"firstname":{$regex:data}},
+         {"lastname":{$regex:data}},{"email":{$regex:data}}]}).count((err,count)=>{
+                if(err){
+                    reject(err);
+                }
+                else{
+                    let data = {
+                        data:dataa,
+                        count:count
+                    }
+                   resolve(data);  
+                }
+           });
           }
        });
       } catch (error) {
