@@ -1,9 +1,10 @@
 const express   = require("express");
 const mongoose  = require("mongoose");
+const {connect} = require("./config/db");
 
 require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/test2')
+mongoose.connect(connect)
 .then(()=>console.log("connected to db"))
 .catch((err)=>console.log("connection error",err))
 

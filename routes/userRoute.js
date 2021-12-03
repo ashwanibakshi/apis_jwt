@@ -1,7 +1,7 @@
 const express   = require("express");
 const route     = express.Router();
 const userController = require("../controller/userController");
-const {authentication} = require("../config/authentication");
+const {authentication} = require("../middleware/authentication");
 
 
 route.post("/register",userController.register);
